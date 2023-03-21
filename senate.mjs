@@ -1,5 +1,5 @@
-export let senateData = {
-{
+export let senateData = 
+  {
     "status":"OK",
     "copyright":" Copyright (c) 2023 Pro Publica Inc. All Rights Reserved.",
     "results":[
@@ -4956,4 +4956,3 @@ export let senateData = {
        }
     ]
  }
-}
