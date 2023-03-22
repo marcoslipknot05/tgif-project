@@ -1,4 +1,4 @@
-export let senateData = 
+export const senateData = 
   {
     "status":"OK",
     "copyright":" Copyright (c) 2023 Pro Publica Inc. All Rights Reserved.",

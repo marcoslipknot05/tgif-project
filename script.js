@@ -1,6 +1,6 @@
-import {senateData} from './senate.mjs';
+import {senateData} from './senate.mjs'; //Se importan los datos de senado de mi archivo 'senate.mjs'
 
-//Se importan los datos de senado de mi archivo 'senate.mjs'
+import {stateData} from './states.mjs';
 
 const membersArr = senateData.results[0].members;
 
@@ -69,3 +69,24 @@ for (let i = 0; i < checkboxes.length; i++) {
   
 //La funcion obtiene el valor del partido seleccionado usando `document.querySelector('input[name="party"]:checked
   
+function makeStatesMenu() {
+  const select = document.createElement("select");
+
+  const defaultOption = document.createElement("option"); //Creo la variable defaultOptiom y la guardo en un elemento 'option' utilizando 'document.createElement("option").
+  defaultOption.value = ""; //Guardo su valor en una cadena vacía (defaultOption.value = "") para que no tenga ningún valor seleccionado de forma predeterminada.
+  defaultOption.textContent = "Select a state"; //Establezco su texto en "Select a state" (defaultOption.textContent = "Select a state") para que aparezca como el primer elemento de la lista desplegable.
+  select.appendChild(defaultOption); //Finalmente agrego esta opción a la lista desplegable utilizando la función select.appendChild(defaultOption).
+
+  for (const [abbr, name] of Object.entries(stateData)) { //Creo un bucle que recorre cada elemento en el objeto stateData. El Object.entries() devuelve el par de valores del objeto, que se recorre usando el bucle. El valor de cada elemento es una matriz con dos elementos: el valor de la clave abbr y el valor de la clave name.
+    const option = document.createElement("option");
+    option.value = abbr;
+    option.textContent = name;
+    select.appendChild(option);
+  }
+
+  return select.outerHTML;
+}
+
+const statesMenuContainer = document.getElementById("states-menu-container");
+statesMenuContainer.innerHTML = makeStatesMenu();
+
