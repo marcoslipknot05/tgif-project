@@ -2,11 +2,12 @@ import {senateData} from './senate.mjs'; //Se importan los datos de senado de mi
 
 import {stateData} from './states.mjs';
 
-const membersArr = senateData.results[0].members;
+let membersArr = senateData.results[0].members;
 
 //Se guardan esos datos en mi variable 'membersArr'
 
 function buildTable(membersArr) {
+  
   document.getElementById("tbody").innerHTML = ""; //traemos el elemento con id tbody y dentro le añadimos un texto vacio
   for (var i = 0; i < membersArr.length; i++) { //para cada i menor que array.length
     var row = document.createElement("tr"); //let row crear un elemento tr
@@ -89,4 +90,11 @@ function makeStatesMenu() {
 
 const statesMenuContainer = document.getElementById("states-menu-container");
 statesMenuContainer.innerHTML = makeStatesMenu();
+
+const selectElement = document.querySelector("#states-menu-container select");
+selectElement.addEventListener("change", () => {
+  const selectedState = selectElement.value;
+  const filteredMembers = membersArr.filter(member => member.state === selectedState || selectedState === "");
+  buildTable(filteredMembers);
+});
 
