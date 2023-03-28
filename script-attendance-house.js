@@ -90,14 +90,14 @@ function getEngagementData(members) {
   // Ordena los miembros por el porcentaje de votos perdidos
   const sortedMembers = members.sort((a, b) => a.missed_votes_pct - b.missed_votes_pct);
   
-  // Calcula el índice que representa el 10% de la longitud de la lista
-  const tenPercentIndex = Math.ceil(sortedMembers.length * 0.1);
+  // Calcula el número de miembros que representa el 10% de la longitud de la lista
+  const numMembers = Math.ceil(sortedMembers.length * 0.1);
   
   // Obtiene los miembros menos comprometidos
-  const leastEngaged = sortedMembers.slice(0, tenPercentIndex);
+  const leastEngaged = sortedMembers.slice(0, numMembers);
   
   // Obtiene los miembros más comprometidos
-  const mostEngaged = sortedMembers.slice(-tenPercentIndex);
+  const mostEngaged = sortedMembers.slice(-numMembers);
   
   // Devuelve los datos
   return {
@@ -117,7 +117,8 @@ function fillTables() {
   // Llena la tabla de los miembros menos comprometidos
   engagementData.leastEngaged.forEach(member => {
     const row = leastTable.insertRow();
-    row.insertCell().innerText = `${member.last_name}, ${member.first_name}`;
+    const nameCell = row.insertCell();
+    nameCell.innerHTML = `<a href="${member.url}">${member.last_name}, ${member.first_name}</a>`;
     row.insertCell().innerText = member.missed_votes;
     row.insertCell().innerText = `${member.missed_votes_pct.toFixed(2)}%`;
   });
@@ -125,10 +126,12 @@ function fillTables() {
   // Llena la tabla de los miembros más comprometidos
   engagementData.mostEngaged.forEach(member => {
     const row = mostTable.insertRow();
-    row.insertCell().innerText = `${member.last_name}, ${member.first_name}`;
+    const nameCell = row.insertCell();
+    nameCell.innerHTML = `<a href="${member.url}">${member.last_name}, ${member.first_name}</a>`;
     row.insertCell().innerText = member.missed_votes;
     row.insertCell().innerText = `${member.missed_votes_pct.toFixed(2)}%`;
   });
 }
 
 fillTables();
+

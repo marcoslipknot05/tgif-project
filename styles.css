@@ -16,3 +16,24 @@
   margin: 10px;
   margin-top: 50px;
 }
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container > div {
+  width: 50%;
+  box-sizing: border-box;
+  padding: 0 20px;
+}
+
+#tables {
+  display: flex;
+}
+
+#tables div {
+  margin: 1rem;
+  width: 50%;
+}
